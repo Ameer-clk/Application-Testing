@@ -14,10 +14,7 @@ CP='\033[1;38;5;221m'
 CPO='\033[1;38;5;205m'
 CN='\033[1;38;5;247m'
 CNC='\033[1;38;5;051m'
-#Coded By Machine404! Don't copy this code without giving me credit~
-#https://instagram.com/invisibleclay100
-#https://twitter.com/whoami4041
-#https://www.youtube.com/channel/UCC_aPnmV_zGfdwktCFE9cPQ
+#Coded By Ameer Ali
 function banner(){
 echo -e ${CP}"     ______ _     ___ ____ _  __         _ _  ____ _  _______ ______       #"
 echo -e ${CP}"    / / ___| |   |_ _/ ___| |/ /        | / |/ ___| |/ /___ /|  _ \ \      #"
@@ -139,7 +136,4 @@ echo -n -e ${YELLOW}"\n[+] Select: "
                 fi
 }
 menu
-#Coded By Machine404! Don't copy this code without giving me credit~
-#https://instagram.com/invisibleclay100
-#https://twitter.com/whoami4041
-#https://www.youtube.com/channel/UCC_aPnmV_zGfdwktCFE9cPQ
+#Coded By Ameer Ali
