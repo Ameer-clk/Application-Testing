@@ -1,8 +1,8 @@
 # clickjack
-<img src="images/pc1.PNG" width="400"> <img src="images/pc2.PNG" width="400">
-<img src="images/pc3.PNG" width="400">
 
-# Installation
+
+# Installation![Screenshot at 2024-05-02 20-55-02](https://github.com/Ameer-clk/Application-Testing/assets/114929844/187624ae-43d3-489e-bf6e-5bef198f417d)
+
     1. git clone https://https://github.com/machine1337/clickjack
     2. cd clickjack && chmod +x clickjack.sh
     
