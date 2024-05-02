@@ -24,7 +24,7 @@ echo -e ${CP}"   | |\____|_____|___\____|_|\_\     \___/|_|\____|_|\_\____/|_| \
 echo -e ${CP}"    \_\                                                           /_/      #"
 echo -e ${CNC}"        A Simple Tool To Find ClickJacking Vulnerability With POC          #"
 echo -e ${YELLOW}"                         Coded By: Ameer Ali                              #"
-echo -e ${CP}"                                                                                #"
+echo -e ${CP}"                             github: https://github.com/Ameer-clk               #"
 echo -e ${CP}"                                                                                   #"
 echo -e ${RED}"#############################################################################\n "
 
