@@ -3,7 +3,7 @@
 # Installation!
 
     1. https://github.com/Ameer-clk/Application-Testing.git
-    2. cd clickjack && chmod +x clickjack.sh
+    2. cd clickjacking && chmod +x clickjack.sh
     
 # Usage
     1. ./clickjack.sh
