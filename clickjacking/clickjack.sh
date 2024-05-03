@@ -123,6 +123,7 @@ banner
 echo -e ${YELLOW}"\n[*] Choose Scanning Type: \n "
 echo -e "  ${NC}[${CG}"1"${NC}]${CNC} Single Domain Scan"
 echo -e "  ${NC}[${CG}"2"${NC}]${CNC} Multiple Domains Scan"
+echo -e "  ${NC}[${CG}"2"${NC}]${CNC} Ip Address"
 echo -e "  ${NC}[${CG}"3"${NC}]${CNC} Exit"
 
 echo -n -e ${YELLOW}"\n[+] Select: "
