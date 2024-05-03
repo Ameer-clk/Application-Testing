@@ -8,7 +8,7 @@
 
 # Installation!
 
-    1. git clone https://https://github.com/machine1337/clickjack
+    1. https://github.com/Ameer-clk/Application-Testing.git
     2. cd clickjack && chmod +x clickjack.sh
     
 # Usage
