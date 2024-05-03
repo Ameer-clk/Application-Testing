@@ -1,4 +1,4 @@
-# ClickJacking Testing Tool
+# ClickJack Testing Tool
 
 ## Overview
 
