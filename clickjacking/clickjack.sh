@@ -135,54 +135,5 @@ echo -n -e ${YELLOW}"\n[+] Select: "
                       exit
                 fi
 }
-
-function single_url(){
-    clear
-    banner
-    echo -e -n ${BLUE}"\n[+] Enter domain name or IP address (e.g http|https://target.com/ or http|https://x.x.x.x/) : "
-    read  url
-
-    # Check if the input is an IP address
-    if [[ $url =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        echo -e -n "\n[+] IP address detected."
-    else
-        echo -e -n "\n[+] Domain name detected."
-    fi
-
-    check=$(curl -s -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0" --connect-timeout 5 --head $url ) 
-    echo "$check" >> temp.txt
-    sami=$(cat temp.txt | egrep -w 'X-Frame-Options|Content-Security-Policy|x-frame-options|content-security-policy:' )
-
-    if [[ $sami = '' ]];
-    then
-        echo -e -n "\n[ ✔ ] ${NC}$url ${RED}VULNERABLE \n"
-        sleep 1
-        echo -e -n ${BLUE}"\nDo U Want To Open POC In Browser: [y/n]: "
-        read back_press
-        if [ $back_press = "y"  ]; then
-            if [ -f vuln.html ]; then
-                #echo -e -n ${RED}"[*] Old Vuln.html File Found! Removing Old File! " 
-                rm vuln.html
-            fi
-            if [ -f poc.html ]; then
-                cat poc.html | sed "s|vuln|$url|" >> vuln.html
-                open vuln.html
-                rm temp.txt
-            else
-                echo -e -n ${RED}"[ X ] POC File Not Found! Exiting"    
-                exit
-            fi
-        elif [ $back_press = "n" ]; then
-            echo -e -n ${CP}"[+] POC Saved As Vuln.html"
-            rm temp.txt
-            cat poc.html | sed "s|vuln|$url|" >> vuln.html
-            sleep 1
-            exit
-        fi
-    else
-        echo -e -n ${CP}"\n[ X ] $url ${CG}NOT VULNERABLE "
-    fi
-}
-
 menu
 #Coded By Ameer Ali
