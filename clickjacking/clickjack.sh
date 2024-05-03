@@ -187,7 +187,5 @@ menu() {
             exit ;;
     esac
 }
-
-menu
 menu
 #Coded By Ameer Ali
