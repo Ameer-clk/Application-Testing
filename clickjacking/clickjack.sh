@@ -135,5 +135,59 @@ echo -n -e ${YELLOW}"\n[+] Select: "
                       exit
                 fi
 }
+
+function check_xss() {
+    clear
+    banner
+    echo -e -n ${BLUE}"\n[+] Enter URL to test for XSS (e.g., http|https://target.com/) : "
+    read url
+    check=$(curl -s -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0" --connect-timeout 5 --head $url)
+    # Add XSS vulnerability detection logic here using curl or other tools
+
+    if [[ $check_contains_xss ]]; then
+        echo -e -n "\n[ ✔ ] ${NC}$url ${RED}VULNERABLE to XSS \n"
+        # Additional actions for XSS vulnerability found
+    else
+        echo -e -n ${CP}"\n[ X ] $url ${CG}NOT VULNERABLE to XSS "
+    fi
+    # Additional actions after checking XSS vulnerability
+}
+
+# Trap function remains the same...
+
+# Menu function updated to include XSS option
+menu() {
+    clear
+    banner
+    echo -e ${YELLOW}"\n[*] Choose Scanning Type: \n "
+    echo -e "  ${NC}[${CG}"1"${NC}]${CNC} Single Domain Scan for ClickJacking"
+    echo -e "  ${NC}[${CG}"2"${NC}]${CNC} Single Domain Scan for XSS"
+    echo -e "  ${NC}[${CG}"3"${NC}]${CNC} Multiple Domains Scan for ClickJacking"
+    echo -e "  ${NC}[${CG}"4"${NC}]${CNC} Multiple Domains Scan for XSS"
+    echo -e "  ${NC}[${CG}"5"${NC}]${CNC} Exit"
+
+    echo -n -e ${YELLOW}"\n[+] Select: "
+    read option
+
+    case $option in
+        1)
+            check_clickjacking ;;
+        2)
+            check_xss ;;
+        3)
+            # Add logic for multiple domains ClickJacking scan
+            ;;
+        4)
+            # Add logic for multiple domains XSS scan
+            ;;
+        5)
+            exit ;;
+        *)
+            echo -e ${RED}"Invalid option. Exiting..."
+            exit ;;
+    esac
+}
+
+menu
 menu
 #Coded By Ameer Ali
