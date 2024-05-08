@@ -1,8 +1,10 @@
-# ClickJack Testing Tool
+# ClickJack Testing and XSS Testing Tool
 
 ## Overview
 
 The ClickJacking Testing Tool is a utility designed to detect and assess ClickJacking vulnerabilities, also known as X-Frame-Options attacks. ClickJacking is a client-side attack where an attacker maliciously embeds a hidden iframe or element on a webpage, tricking users into interacting with it unintentionally. This tool aids in identifying such vulnerabilities in web applications, helping  security professionals and developers secure their systems against this type of attack.
+
+XSSChecker is a security tool designed to identify potential Cross-Site Scripting (XSS) vulnerabilities in web applications. XSS is a common attack vector that allows attackers to inject malicious scripts into web pages viewed by other users.
 
 
 
@@ -27,6 +29,8 @@ https://github.com/Ameer-clk/Application-Testing.git
 
 ```
 cd clickjacking
+
+cd xss
 
 ```
 
