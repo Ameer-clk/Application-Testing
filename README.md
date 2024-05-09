@@ -16,11 +16,11 @@ XSSChecker is a security tool designed to identify potential Cross-Site Scriptin
 
 - **Time-Saving:** Automates the process of ClickJacking testing, saving time for security professionals and developers.
 
-- *HTTP Response Header Analysis: XSSDetect analyzes HTTP response headers for security indicator.
+-  HTTP Response Header Analysis: XSSDetect analyzes HTTP response headers for security indicator.
 
-- **X-Frame-Options: Ensures content can only be displayed in a frame on the same origin as the page.
+-  X-Frame-Options: Ensures content can only be displayed in a frame on the same origin as the page.
 
-- **Content-Security-Policy: Defines approved sources of content that the browser may load.
+-  Content-Security-Policy: Defines approved sources of content that the browser may load.
 
 ## Installation
 
