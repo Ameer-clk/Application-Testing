@@ -14,19 +14,18 @@ CP='\033[1;38;5;221m'
 CPO='\033[1;38;5;205m'
 CN='\033[1;38;5;247m'
 CNC='\033[1;38;5;051m'
-#Coded By Ameer Ali
+# Coded By Ameer Ali
 function banner(){
-echo -e ${CP}"  ____ _ _      _          _            _    _                                 #"
-echo -e ${CP}" / ___| (_) ___| | __     | | __ _  ___| | _(_)_ __   __ _                     #"
-echo -e ${CP}"| |   | | |/ __| |/ /  _  | |/ _\` |/ __| |/ / | '_ \ / _\` |                  #"
-echo -e ${CP}"| |___| | | (__|   <  | |_| | (_| | (__|   <| | | | | (_| |                    #"
-echo -e ${CP}" \____|_|_|\___|_|\_\  \___/ \__,_|\___|_|\_\_|_| |_|\__, |                    #"
-echo -e ${CP}"                                                     |___/                     #"
-echo -e ${CNC}"       A Simple Tool To Find ClickJacking Vulnerability With POC              #"
-echo -e ${GREEN}"                     Coded By: Ameer Ali                                    #"
-echo -e ${CP}"         Follow me: Github: https://github.com/Ameer-clk                       #"
-echo -e ${CP}"                                                                               #"
-echo -e ${RED}"#############################################################################\n "
+    echo -e ${BLUE}"          ██╗██╗   ██╗███████╗██████╗ ██╗   ██╗███████╗██████╗ \n"
+    echo -e ${BLUE}"          ██║██║   ██║██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗ \n"
+    echo -e ${GRAY}"          ██║██║   ██║█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝ \n"
+    echo -e ${ORANGE}"██       ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗ \n"
+    echo -e ${ORANGE}"██      ██║ ╚████╔╝ ███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║ \n"
+    echo -e ${RED}" ╚██████╔╝  ╚██╔╝  ██╗╚════██║██║  ██║  ╚██╔╝  ╚════██║██║  ██║ \n"
+    echo -e ${RED}"  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝ \n"
+    echo -e ${GREEN}"                     Created By: Ameer Ali                             \n"
+    echo -e ${BLUE2}"         Follow me: Github: https://github.com/Ameer-clk                \n"
+    echo -e ${NEW}"#############################################################################\n"
 }
 
 function single_url(){
@@ -116,25 +115,61 @@ echo -e ${YELLOW}"[*] Thanks For Using Clickjacking  :)"
 exit
 }
 
+upload_url_file() {
+  clear
+  banner
+  echo -e -n ${BLUE}"\n[+] Enter path of URL list file: "
+  read url_file
+  if [ -f "$url_file" ]; then
+    echo -e ${GREEN}"\n[+] File uploaded successfully!"
+    for sanga in $(cat "$url_file"); do
+      res=$(curl -s -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0" --connect-timeout 5 --head "$sanga" )
+      echo "$res" >> temp.txt
+
+      sami=$(cat temp.txt | egrep -w 'X-Frame-Options|Content-Security-Policy|x-frame-options|content-security-policy:' )
+
+      if [[ $sami = '' ]];
+      then
+        echo -e -n ${BLUE2}"\n[ ✔ ] ${CG}$sanga ${RED}VULNERABLE \n" 
+        echo "$sanga" >> vulnerable_urls.txt
+      else
+        echo -e -n ${CP}"\n[ X ] ${NC}$sanga ${YELLOW}NOT VULNERABLE "
+      fi
+
+    done
+    rm temp.txt
+  else
+    echo -e ${RED}"[!] File not found. Please provide a valid URL list file."
+  fi
+}
+
 menu()
 {
-clear
-banner
-echo -e ${YELLOW}"\n[*] Choose Scanning Type: \n "
-echo -e "  ${NC}[${CG}"1"${NC}]${CNC} Single Domain Scan"
-echo -e "  ${NC}[${CG}"2"${NC}]${CNC} Multiple Domains Scan"
-echo -e "  ${NC}[${CG}"3"${NC}]${CNC} Exit"
+  clear
+  banner
+  echo -e ${YELLOW}"\n[*] Choose Scanning Type: \n "
+  echo -e "  ${NC}[${CG}"1"${NC}]${CNC} Single Domain Scan"
+  echo -e "  ${NC}[${CG}"2"${NC}]${CNC} Multiple Domains Scan"
+  echo -e "  ${NC}[${CG}"3"${NC}]${CNC} Upload URL File"
+  echo -e "  ${NC}[${CG}"4"${NC}]${CNC} Exit"
 
-echo -n -e ${YELLOW}"\n[+] Select: "
-        read redi_play
-                if [ $redi_play -eq 1 ]; then
-                        single_url
-                elif [ $redi_play -eq 2 ]; then
-                        mul_url
-                elif [ $redi_play -eq 3 ]; then
+  echo -n -e ${YELLOW}"\n[+] Select: "
+          read redi_play
+                  if [ $redi_play -eq 1 ]; then
+                          single_url
+                  elif [ $redi_play -eq 2 ]; then
+                          mul_url
+                  elif [ $redi_play -eq 3 ]; then
+                          upload_url_file
+                  elif [ $redi_play -eq 4 ]; then
                       exit
-                fi
+                  else
+                      echo -e ${RED}"[!] Invalid option. Please select a valid option."
+                      menu
+                  fi
 }
+
 menu
 #Coded By Ameer Ali
 #Follow me: Github: https://github.com/Ameer-clk
+
