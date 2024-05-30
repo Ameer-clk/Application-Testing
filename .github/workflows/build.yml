@@ -24,18 +24,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Snyk CLI
-        run: npm install -g snyk
-
-      - name: Authenticate Snyk
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
-
       - name: Run Snyk to check for vulnerabilities
-        run: snyk test
+        uses: snyk/actions/node@master
+        with:
+          args: test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Report results to Snyk
-        run: snyk monitor
+        uses: snyk/actions/node@master
+        with:
+          args: monitor
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          
