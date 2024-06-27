@@ -17,21 +17,22 @@ CPO='\033[1;38;5;205m'
 CN='\033[1;38;5;247m'
 CNC='\033[1;38;5;051m'
 
+# Coded by Ameer Ali
 # Banner function
 function banner() {
-    echo -e "${CP}                                                                                #"
-    echo -e "${CP}                                                                                #"
-    echo -e "${CP}                 __  ______ ____     ____ _               _                     #"
-    echo -e "${CP}                \\ \\/ / ___/ ___|   / ___| |__   ___  ___| | _____ _ __          #"
-    echo -e "${CP}                 \\  /\\___ \\___ \\  | |   | '_ \\ / _ \\/ __| |/ / _ \\ '__|         #"
-    echo -e "${CP}                  /  \\ ___) |__) | | |___| | | |  __/ (__|   <  __/ |           #"
-    echo -e "${CP}                 /_/\\_\\____/____/   \\____|_| |_|\\___|\\___|_|\\_\\___|_|           #"
-    echo -e "${CP}                                                                                #"
+    echo -e "${CP}                                                                        #"
+    echo -e "${CP}                                                                        #"
+    echo -e "${CP}                             ██╗  ██╗███████╗███████╗               #"
+    echo -e "${CP}                             ╚██╗██╔╝██╔════╝██╔════╝               #"
+    echo -e "${CP}                              ╚███╔╝ ███████╗███████╗               #"
+    echo -e "${CP}                              ██╔██╗ ╚════██║╚════██║               #"
+    echo -e "${CP}                             ██╔╝ ██╗███████║███████║               #"
+    echo -e "${CP}                             ╚═╝  ╚═╝╚══════╝╚══════╝               #"
     echo -e "${CNC}                       A Tool To Find XSS Vulnerability                        #"
-    echo -e "${GREEN}                           Coded By: Ameer Ali                               #"
-    echo -e "${CP}                Follow me: Github: https://github.com/Ameer-clk                 #"
-    echo -e "${CP}                                                                                #"
-    echo -e "${RED}#############################################################################\n "
+    echo -e "${GREEN}                           Coded By: Ameer Ali                        #"
+    echo -e "${CP}                Follow me: Github: https://github.com/Ameer-clk         #"
+    echo -e "${CP}                                                                        #"
+    echo -e "${RED}#######################################################################\n "
 }
 
 # Scan single domain function
@@ -75,6 +76,34 @@ function scan_multiple_domains() {
     rm temp.txt
 }
 
+# Scan URLs from a file function
+function scan_urls_from_file() {
+    clear
+    banner
+    echo -e -n "${CP}\n[+] Enter path of URL list file: "
+    read urls_file
+
+    if [ ! -f "$urls_file" ]; then
+        echo -e "${RED}[-] File not found: $urls_file"
+        sleep 2
+        return
+    fi
+
+    while IFS= read -r url; do
+        response=$(curl -s -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0" --connect-timeout 5 --head "$url")
+        echo "$response" >> temp.txt
+
+        if grep -q -w 'X-Frame-Options|Content-Security-Policy|x-frame-options|content-security-policy:' temp.txt; then
+            echo -e -n "${BLUE2}\n[ X ] $url ${YELLOW}NOT VULNERABLE\n"
+        else
+            echo -e -n "${BLUE2}\n[ ✔ ] $url ${RED}VULNERABLE\n"
+            echo "$url" >> vulnerable_urls.txt
+        fi
+    done < "$urls_file"
+
+    rm temp.txt
+}
+
 
 # Trap Ctrl+C
 trap ctrl_c INT
@@ -99,6 +128,7 @@ function main_menu() {
     echo -e "${YELLOW}\n[*] Choose Scanning Type: \n "
     echo -e "  ${NC}[${CG}1${NC}]${CNC} Single Domain Scan"
     echo -e "  ${NC}[${CG}2${NC}]${CNC} Multiple Domains Scan"
+    echo -e "  ${NC}[${CG}3${NC}]${CNC} Scan URLs from a file"
     echo -e "  ${NC}[${CG}4${NC}]${CNC} Exit\n"
 
     echo -n -e "${YELLOW}[+] Select: "
@@ -109,6 +139,8 @@ function main_menu() {
     elif [ "$menu_choice" -eq 2 ]; then
         scan_multiple_domains
     elif [ "$menu_choice" -eq 3 ]; then
+        scan_urls_from_file
+    elif [ "$menu_choice" -eq 4 ]; then
         exit
     fi
 }
