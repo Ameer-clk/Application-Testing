@@ -35,11 +35,6 @@ https://github.com/Ameer-clk/Application-Testing.git
 
 ```
 cd clickjacking
-```
-
-Upcomming:
-
-CI/CD Integration 
 cd xss
 
 ```
